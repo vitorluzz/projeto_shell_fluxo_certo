@@ -1,5 +1,15 @@
 # Fluxo Certo - Script de Execução
 
+```
+                            ______ _                    _____          _        
+                           |  ____| |                  / ____|        | |       
+                           | |__  | |_   ___  _____   | |     ___ _ __| |_ ___  
+                           |  __| | | | | \ \/ / _ \  | |    / _ \ '__| __/ _ \ 
+                           | |    | | |_| |>  < (_) | | |___|  __/ |  | || (_) |
+                           |_|    |_|\__,_/_/\_\___/   \_____\___|_|   \__\___/ 
+                                                      
+```
+
 Este repositório faz parte do projeto **Fluxo Certo** e contém um Shell Script para facilitar a execução e inicialização do ambiente do projeto de forma automatizada.
 
 ## 📜 Sobre o Script
@@ -23,7 +33,7 @@ Antes de executar o script, certifique-se de que você possui:
 
 ### Passo a passo
 
-1 - Criando o repositório:
+#### 1 - Criando o repositório:
 
 1.1 Clone este repositório:
    ```bash
@@ -43,7 +53,7 @@ chmod +x executar.sh
 ./executar.sh
 ```
 
-2 - Configurar as variáveis de ambiente dentro da sua instância EC2:
+#### 2 - Configurar as variáveis de ambiente dentro da sua instância EC2:
 
 2.1 Acesse o bashrc da sua instância:
 ```bash
@@ -59,5 +69,9 @@ export AWS_SESSION_TOKEN=suachavedeacesso...
 
 2.3 Salve as alterações:
 
-CTRL O + Enter + CTRL X
+**CTRL O + Enter + CTRL X**
 
+
+#### 3 - Criação do bucket S3
+
+3.1 Vamos criar um bucket S3 com o nome 'dl-fluxo-certo'

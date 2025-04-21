@@ -39,34 +39,22 @@ Antes de executar o script, certifique-se de que você possui:
 
 1.1 Clone este repositório:
    ```bash
-   git clone https://github.com/seu-usuario/fluxo-certo-script.git
-   cd fluxo-certo-script
+   git clone https://github.com/vitorluzz/projeto_shell_fluxo_certo.git
+   cd projeto_shell_fluxo_certo
    ```
    
-1.2 Dê permissão de execução ao script:
-
-```bash
-chmod +x executar.sh
-```
-
-1.3 Execute o script:
-
-```bash
-./executar.sh
-```
-
 ---
 
 #### 2 - Configurar as variáveis de ambiente dentro da sua instância EC2:
 
 2.1 Na tela de laboratório AWS Academy, clique em 'AWS Details':
-![alt text](step2-1.png)
+![alt text](./assets/step2-1.png)
 
 2.2 Clique em details para exibir os tokens:
-![alt text](step2-1-1.png)
+![alt text](./assets/step2-1-1.png)
 
 2.3 Guarde essas chaves, elas são as chaves de acesso da sua instância:
-![alt text](step2-3.png)
+![alt text](./assets/step2-3.png)
 
 > Essas chaves atualizam toda vez que fizermos iniciarmos um novo laboratório, então, toda vez esse passo é necessário!
 
@@ -91,23 +79,62 @@ export AWS_DEFAULT_REGION=us-east-1  # ou outra região indicada
 
 #### 3 - Criação do bucket S3
 
-1 Crie um bucket S3 com o nome 'dl-fluxo-certo'
+3.1 Crie um bucket S3 com o nome 'dl-fluxo-certo'
 > **OBS: O bucket precisa ter exatamente esse nome!!!**
 
-![alt text](step.png)
+![alt text](./assets/step.png)
 
 > As configurações do bucket são as padrões.
+
+3.2 Adicionando ao S3 os dados brutos:
+> Os dados para adicionar estão no diretório arquivos desse repositório.
+
+Execute os comandos:
+
+3.3 Atualize o Sistema Operacional:
+```bash
+sudo apt update && sudo apt upgrade -y
+```
+
+3.4 Instalando a ferramenta CLI:
+```bash
+sudo apt install unzip
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+```
+
+3.5 Upload para o S3:
+```bash
+cd arquivos
+
+nome_bucket="dl-fluxo-certo"
+
+nome_arquivo1="curated-entrada-passageiros-por-linha-2020-2024.xlsx"
+nome_arquivo2="curated-demanda-de-passageiros-por-estacao-2020-2024.xlsx"
+
+echo "Fazendo upload de '$nome_arquivo1' para o bucket 's3://$nome_bucket/' ..."
+aws s3 cp "$nome_arquivo1" "s3://$nome_bucket/$nome_arquivo1" && \
+echo "✅ Upload de '$nome_arquivo1' concluído com sucesso!" || \
+echo "❌ Erro ao fazer upload de '$nome_arquivo1'."
+
+echo "Fazendo upload de '$nome_arquivo2' para o bucket 's3://$nome_bucket/' ..."
+aws s3 cp "$nome_arquivo2" "s3://$nome_bucket/$nome_arquivo2" && \
+echo "✅ Upload de '$nome_arquivo2' concluído com sucesso!" || \
+echo "❌ Erro ao fazer upload de '$nome_arquivo2'."
+
+```
 ---
 
 #### 4 - Função/Role na EC2
 
 4.1 Na instância, vá em modificar a função do IAM
 
-![alt text](step1.png)
+![alt text](./assets/step1.png)
 
 4.2 Selecione a opção 'LabInstanceProfile':
 
-![alt text](step2.png)
+![alt text](./assets/step2.png)
 
 ---
 
@@ -121,7 +148,7 @@ aws configure
 
 5.2 Então, coloque as configurações conforme os tokens do laboratório:
 
-![alt text](step2-3.png)
+![alt text](./assets/step2-3.png)
 
 
 ---
@@ -144,4 +171,21 @@ export DB_PASSWORD=urubu100
 
 ```bash
 source ~/.bashrc
+```
+
+---
+
+#### 7 - Executando o Script
+
+
+7.1 Dê permissão de execução ao script:
+
+```bash
+chmod +x bash.sh
+```
+
+7.2 Execute o script:
+
+```bash
+./bash.sh
 ```

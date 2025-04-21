@@ -113,37 +113,6 @@ fi
 echo "Saindo do diretório do site..."
 cd ..
 
-# BUCKET S3
-
-echo "Entrando no container do Fluxo Certo..."
-sudo docker exec -it container_fluxocerto bash
-
-echo "Acessando o diretório dos dados brutos..."
-cd java/conexao-banco/src/main/java/school/sptech/ApachePOI/arquivos
-
-echo "Atualizando o container..."
-apt update && apt install -y awscli
-
-nome_bucket="dl-fluxo-certo"
-
-nome_arquivo1="curated-entrada-passageiros-por-linha-2020-2024.xlsx"
-nome_arquivo2="curated-demanda-de-passageiros-por-estacao-2020-2024.xlsx"
-
-echo "Fazendo upload de '$nome_arquivo1' para o bucket 's3://$nome_bucket/' ..."
-aws s3 cp "$nome_arquivo1" "s3://$nome_bucket/$nome_arquivo1" && \
-echo "✅ Upload de '$nome_arquivo1' concluído com sucesso!" || \
-echo "❌ Erro ao fazer upload de '$nome_arquivo1'."
-
-echo "Fazendo upload de '$nome_arquivo2' para o bucket 's3://$nome_bucket/' ..."
-aws s3 cp "$nome_arquivo2" "s3://$nome_bucket/$nome_arquivo2" && \
-echo "✅ Upload de '$nome_arquivo2' concluído com sucesso!" || \
-echo "❌ Erro ao fazer upload de '$nome_arquivo2'."
-
-echo "Saindo do container..."
-exit
-
-
-
 # ETL
 echo "Copiando o arquivo jar para dentro da instância..."
 sudo docker cp container_fluxocerto:/usr/src/app/java/conexao-banco/target/conexao-banco-1.0-SNAPSHOT-jar-with-dependencies.jar ./conexao-banco.jar

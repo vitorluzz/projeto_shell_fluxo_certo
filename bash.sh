@@ -55,19 +55,6 @@ else
     echo "Instalação do Docker concluída!"
 fi
 
-# VERIFICAÇÃO UNZIP
-echo "Verificando se o unzip está instalado..."
-unzip -v > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-    echo "Cliente já possui o unzip instalado!"
-else
-    echo "Cliente não possui o unzip instalado!"
-    echo "Instalando o unzip..."
-    sudo apt install -y unzip
-    echo "Instalação do unzip concluída!"
-fi
-
-
 echo "Iniciando os serviços de docker..."
 sudo systemctl start docker
 
@@ -114,12 +101,14 @@ echo "Saindo do diretório do site..."
 cd ..
 
 # ETL
-echo "Copiando o arquivo jar para dentro da instância..."
+echo "Copiando o arquivo JAR que está no docker para dentro da instância..."
 sudo docker cp container_fluxocerto:/usr/src/app/java/conexao-banco/target/conexao-banco-1.0-SNAPSHOT-jar-with-dependencies.jar ./conexao-banco.jar
 
 echo "Executando o JAR"
 java -jar conexao-banco.jar
 
 echo "Tratamento de dados foi um sucesso!"
+
+echo "A inicialização do projeto foi completa!"
 
 

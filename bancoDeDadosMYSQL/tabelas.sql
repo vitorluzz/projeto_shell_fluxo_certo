@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS fluxoCerto;
-USE fluxoCerto;
+CREATE DATABASE IF NOT EXISTS fluxocerto;
+USE fluxocerto;
 
 create table if not exists empresa ( 
 	id int primary key auto_increment,
@@ -63,3 +63,14 @@ create table if not exists log (
     origem varchar(50),
     constraint fk_logEmpresa FOREIGN KEY (fk_empresa) REFERENCES empresa(id)
 );
+
+
+CREATE USER 'admin'@'%' IDENTIFIED BY 'urubu100';
+
+CREATE USER 'admin'@'localhost' IDENTIFIED BY 'urubu100';
+
+GRANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost' WITH GRANT OPTION;
+
+GRANT ALL PRIVILEGES ON *.* TO 'admin'@'%' WITH GRANT OPTION;
+
+FLUSH PRIVILEGES;

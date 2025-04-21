@@ -85,6 +85,7 @@ if [ "$(sudo docker ps -a -q -f name=container-bd)" ]; then
     fi
 else
     echo "Criando e iniciando o container do banco de dados..."
+    sudo docker build -t imagem-bd-fluxo-certo .
     sudo docker run -d --name container-bd -p 3306:3306 imagem-bd-fluxo-certo
 fi
 echo "Saindo do diretório do banco de dados..."
@@ -105,6 +106,7 @@ if [ "$(sudo docker ps -a -q -f name=container_fluxocerto)" ]; then
     fi
 else
     echo "Criando e iniciando o container do site..."
+    sudo docker build -t fluxocerto .
     sudo docker run -d -p 3000:3000 --name container_fluxocerto fluxocerto
 fi
 
@@ -117,49 +119,38 @@ echo "Entrando no container do Fluxo Certo..."
 sudo docker exec -it container_fluxocerto bash
 
 echo "Acessando o diretório dos dados brutos..."
-cd Documentos/Bases\ de\ Dados/
+cd java/conexao-banco/src/main/java/school/sptech/ApachePOI/arquivos
 
 echo "Atualizando o container..."
 apt update && apt install -y awscli
 
-read -p "Digite o nome do bucket S3 (sem 's3://'): " nome_bucket
+nome_bucket="dl-fluxo-certo"
 
-nome_arquivo1="curated - entrada passageiros por linha 2020 - 2024.csv"
-nome_arquivo2="curated - Demanda de Passageiros por Estação 2020 - 2024.csv"
+nome_arquivo1="curated-entrada-passageiros-por-linha-2020-2024.xlsx"
+nome_arquivo2="curated-demanda-de-passageiros-por-estacao-2020-2024.xlsx"
 
-# Upload do primeiro arquivo
-if [ -f "$nome_arquivo1" ]; then
-    echo "Fazendo upload de '$nome_arquivo1' para o bucket 's3://$nome_bucket/' ..."
-    
-    aws s3 cp "$nome_arquivo1" "s3://$nome_bucket/$nome_arquivo1"
-    
-    if [ $? -eq 0 ]; then
-        echo "✅ Upload de '$nome_arquivo1' concluído com sucesso!"
-    else
-        echo "❌ Erro ao fazer upload de '$nome_arquivo1'."
-    fi
-else
-    echo "❌ Arquivo '$nome_arquivo1' não encontrado no diretório atual."
-fi
+echo "Fazendo upload de '$nome_arquivo1' para o bucket 's3://$nome_bucket/' ..."
+aws s3 cp "$nome_arquivo1" "s3://$nome_bucket/$nome_arquivo1" && \
+echo "✅ Upload de '$nome_arquivo1' concluído com sucesso!" || \
+echo "❌ Erro ao fazer upload de '$nome_arquivo1'."
 
-# Upload do segundo arquivo
-if [ -f "$nome_arquivo2" ]; then
-    echo "Fazendo upload de '$nome_arquivo2' para o bucket 's3://$nome_bucket/' ..."
-    
-    aws s3 cp "$nome_arquivo2" "s3://$nome_bucket/$nome_arquivo2"
-    
-    if [ $? -eq 0 ]; then
-        echo "✅ Upload de '$nome_arquivo2' concluído com sucesso!"
-    else
-        echo "❌ Erro ao fazer upload de '$nome_arquivo2'."
-    fi
-else
-    echo "❌ Arquivo '$nome_arquivo2' não encontrado no diretório atual."
-fi
+echo "Fazendo upload de '$nome_arquivo2' para o bucket 's3://$nome_bucket/' ..."
+aws s3 cp "$nome_arquivo2" "s3://$nome_bucket/$nome_arquivo2" && \
+echo "✅ Upload de '$nome_arquivo2' concluído com sucesso!" || \
+echo "❌ Erro ao fazer upload de '$nome_arquivo2'."
 
-echo "Saindo do diretório dos dados brutos..."
-cd ..
-cd ..
+echo "Saindo do container..."
+exit
 
-echo "Entrando no diretório do ETL..."
-cd java/conexao-banco/target/
+
+
+# ETL
+echo "Copiando o arquivo jar para dentro da instância..."
+sudo docker cp container_fluxocerto:/usr/src/app/java/conexao-banco/target/conexao-banco-1.0-SNAPSHOT-jar-with-dependencies.jar ./conexao-banco.jar
+
+echo "Executando o JAR"
+java -jar conexao-banco.jar
+
+echo "Tratamento de dados foi um sucesso!"
+
+

@@ -214,7 +214,7 @@ crontab –e
 
 **8.3** Adicionando o comando para executar o JAR de 5 em 5 minutos:
 ```
-*/5 * * * * /usr/bin/java -jar /caminho/para/seu/arquivo.jar
+*/5 * * * * /usr/bin/java -jar /home/ubuntu/conexao-banco.jar
 ```
 
 **8.4** Salve as alterações:

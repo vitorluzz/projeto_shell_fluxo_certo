@@ -21,7 +21,7 @@ DB_USER=admin\n\
 DB_PASSWORD=urubu100\n\
 DB_PORT=3306\n\
 APP_PORT=8080\n\
-APP_HOST=localhost" > ./app/.env
+APP_HOST=localhost" > /usr/src/app.env
 
 # Instala as dependências do projeto
 RUN npm install

@@ -237,9 +237,9 @@ crontab –e
 ![alt text](./assets/image.png)
 
 
-**9.3** Adicionando o comando para executar o JAR de 5 em 5 minutos:
+**9.3** Adicionando o comando para executar o JAR de 1 em 1 semana:
 ```
-*/5 * * * * /usr/bin/java -jar /home/ubuntu/conexao-banco.jar
+0 0 * * 0 /usr/bin/java -jar /home/ubuntu/conexao-banco.jar
 ```
 
 **9.4** Salve as alterações:
@@ -247,21 +247,6 @@ crontab –e
 **CTRL + O , ENTER, CTRL + X**
 
 
----
 
-
-
----
-<!-- #### 10 - Acessando o site do projeto:
-
-Selecione sua instância e copie o endereço IPv4 público da mesma:
-![alt text](./assets/rodarsite.png)
-
-E no seu navegador, coloque o seguinte URL:
-```bash
-http://seuenderecoipv4:8080/
-```
-
-E pronto, você terá o projeto rodando! -->
 
 

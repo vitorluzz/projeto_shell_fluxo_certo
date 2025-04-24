@@ -237,9 +237,27 @@ crontab –e
 **CTRL + O , ENTER, CTRL + X**
 
 
+---
 
+#### 9 - Configurando o grupo de segurança da instância:
 
+Vamos definir uma nova regra de entrada, para que qualquer dispositivo possa acessar o site do projeto:
 
+![alt text](./assets/gruposeguranca.png)
 
+> Como nossa aplicação está rodando na porta 8080, definimos uma regra de entrada que qualquer dispositivo possa acessar a aplicação através dessa porta.
+
+---
+#### 10 - Acessando o site do projeto:
+
+Selecione sua instância e copie o endereço IPv4 público da mesma:
+![alt text](./assets/rodarsite.png)
+
+E no seu navegador, coloque o seguinte URL:
+```bash
+http://seuenderecoipv4:8080/
+```
+
+E pronto, você terá o projeto rodando!
 
 

@@ -14,7 +14,7 @@ RUN git clone https://github.com/FaelPavani/FluxoCerto .
 RUN git pull
 
 # Copia o arquivo .env para a pasta public dentro do projeto
-COPY .env ./public/.env
+COPY .env ./app/.env
 
 # Instala as dependências do projeto
 RUN npm install

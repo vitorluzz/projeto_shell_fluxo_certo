@@ -13,13 +13,20 @@ RUN git clone https://github.com/FaelPavani/FluxoCerto .
 # Atualiza o repositório para garantir que temos a versão mais recente
 RUN git pull
 
-# Copia o arquivo .env para a pasta public dentro do projeto
-COPY .env ./app/.env
+# Cria o arquivo .env com as variáveis
+RUN echo "AMBIENTE_PROCESSO=producao\n\
+DB_HOST=localhost\n\
+DB_DATABASE=fluxocerto\n\
+DB_USER=admin\n\
+DB_PASSWORD=urubu100\n\
+DB_PORT=3306\n\
+APP_PORT=8080\n\
+APP_HOST=localhost" > ./app/.env
 
 # Instala as dependências do projeto
 RUN npm install
 
-# Exponha a porta usada pela aplicação (modifique se necessário)
+# Exponha a porta usada pela aplicação
 EXPOSE 8080
 
 # Define o comando padrão para iniciar a aplicação

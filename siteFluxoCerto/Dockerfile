@@ -11,6 +11,6 @@ RUN git pull
 # Instala as dependências do projeto
 RUN npm install
 # Exponha a porta usada pela aplicação (modifique se necessário)
-EXPOSE 3000
+EXPOSE 8080
 # Define o comando padrão para iniciar a aplicação
 CMD ["npm", "start"]

@@ -97,33 +97,48 @@ Execute os comandos:
 sudo apt update && sudo apt upgrade -y
 ```
 
-**3.4** Instalando a ferramenta CLI e unzip:
+**3.4** Instalando a ferramenta unzip:
 ```bash
 sudo apt install unzip
+
+```
+
+**3.5** Instalando a ferramenta CLI:
+```bash
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 unzip awscliv2.zip
 sudo ./aws/install
 ```
 
-**3.5** Upload para o S3:
+**3.6** Upload dos arquivos para o S3:
+
+Subindo o arquivo 1:
 ```bash
 cd arquivos
 
 nome_bucket="dl-fluxo-certo"
 
 nome_arquivo1="curated-entrada-passageiros-por-linha-2020-2024.xlsx"
-nome_arquivo2="curated-demanda-de-passageiros-por-estacao-2020-2024.xlsx"
 
 echo "Fazendo upload de '$nome_arquivo1' para o bucket 's3://$nome_bucket/' ..."
 aws s3 cp "$nome_arquivo1" "s3://$nome_bucket/$nome_arquivo1" && \
 echo "✅ Upload de '$nome_arquivo1' concluído com sucesso!" || \
 echo "❌ Erro ao fazer upload de '$nome_arquivo1'."
+```
+
+Subindo o arquivo 2:
+```bash
+cd arquivos
+
+nome_bucket="dl-fluxo-certo"
+
+nome_arquivo2="curated-demanda-de-passageiros-por-estacao-2020-2024.xlsx"
+
 
 echo "Fazendo upload de '$nome_arquivo2' para o bucket 's3://$nome_bucket/' ..."
 aws s3 cp "$nome_arquivo2" "s3://$nome_bucket/$nome_arquivo2" && \
 echo "✅ Upload de '$nome_arquivo2' concluído com sucesso!" || \
 echo "❌ Erro ao fazer upload de '$nome_arquivo2'."
-
 ```
 ---
 

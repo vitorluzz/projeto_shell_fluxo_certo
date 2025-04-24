@@ -196,59 +196,63 @@ source ~/.bashrc
 
 ---
 
-#### 7 - Executando o Script
-
-**7.1 Vá ao diretório principal desse projeto:**
-```bash
-cd ~/projeto_shell_fluxo_certo/
-```
-
-**7.2** Dê permissão de execução ao script:
-```bash
-chmod +x bash.sh
-```
-
-**7.3** Execute o script:
-```bash
-./bash.sh
-```
----
-
-#### 8 - Configurando o CRON (Agendador de Tarefas)
-
->Vamos agendar a execução do arquivo JAR usando o CRON, garantindo que ele seja executado periodicamente para manter a integridade dos dados.
-
-**8.1** Acessando o crontab:
-```bash
-crontab –e
-```
-
-**8.2** Selecione o editor nano: (OPÇÃO 1)
-![alt text](./assets/image.png)
-
-
-**8.3** Adicionando o comando para executar o JAR de 5 em 5 minutos:
-```
-*/5 * * * * /usr/bin/java -jar /home/ubuntu/conexao-banco.jar
-```
-
-**8.4** Salve as alterações:
-
-**CTRL + O , ENTER, CTRL + X**
-
-
----
-
-#### 9 - Configurando o grupo de segurança da instância:
+#### 7 - Configurando o grupo de segurança da instância:
 
 Vamos definir uma nova regra de entrada, para que qualquer dispositivo possa acessar o site do projeto:
 
 ![alt text](./assets/gruposeguranca.png)
 
 > Como nossa aplicação está rodando na porta 8080, definimos uma regra de entrada que qualquer dispositivo possa acessar a aplicação através dessa porta.
+---
+
+#### 8 - Executando o Script
+
+**8.1 Vá ao diretório principal desse projeto:**
+```bash
+cd ~/projeto_shell_fluxo_certo/
+```
+
+**8.2** Dê permissão de execução ao script:
+```bash
+chmod +x bash.sh
+```
+
+**8.3** Execute o script:
+```bash
+./bash.sh
+```
+---
+
+**EXTRA:**
+#### 9 - Configurando o CRON (Agendador de Tarefas)
+
+>Vamos agendar a execução do arquivo JAR usando o CRON, garantindo que ele seja executado periodicamente para manter a integridade dos dados.
+
+**9.1** Acessando o crontab:
+```bash
+crontab –e
+```
+
+**9.2** Selecione o editor nano: (OPÇÃO 1)
+![alt text](./assets/image.png)
+
+
+**9.3** Adicionando o comando para executar o JAR de 5 em 5 minutos:
+```
+*/5 * * * * /usr/bin/java -jar /home/ubuntu/conexao-banco.jar
+```
+
+**9.4** Salve as alterações:
+
+**CTRL + O , ENTER, CTRL + X**
+
 
 ---
-#### 10 - Acessando o site do projeto:
+
+
+
+---
+<!-- #### 10 - Acessando o site do projeto:
 
 Selecione sua instância e copie o endereço IPv4 público da mesma:
 ![alt text](./assets/rodarsite.png)
@@ -258,6 +262,6 @@ E no seu navegador, coloque o seguinte URL:
 http://seuenderecoipv4:8080/
 ```
 
-E pronto, você terá o projeto rodando!
+E pronto, você terá o projeto rodando! -->
 
 

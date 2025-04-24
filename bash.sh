@@ -94,7 +94,7 @@ if [ "$(sudo docker ps -a -q -f name=container_fluxocerto)" ]; then
 else
     echo "Criando e iniciando o container do site..."
     sudo docker build -t fluxocerto .
-    sudo docker run -d -p 3000:3000 --name container_fluxocerto fluxocerto
+    sudo docker run -d -p 8080:8080 --name container_fluxocerto fluxocerto
 fi
 
 echo "Saindo do diretório do site..."
@@ -109,6 +109,16 @@ java -jar conexao-banco.jar
 
 echo "Tratamento de dados foi um sucesso!"
 
-echo "A inicialização do projeto foi completa!"
-
+echo "  
+  ______ _                    _____          _        
+ |  ____| |                  / ____|        | |       
+ | |__  | |_   ___  _____   | |     ___ _ __| |_ ___  
+ |  __| | | | | \ \/ / _ \  | |    / _ \ '__| __/ _ \ 
+ | |    | | |_| |>  < (_) | | |___|  __/ |  | || (_) |
+ |_|    |_|\__,_/_/\_\___/   \_____\___|_|   \__\___/ 
+                                                      
+"
+echo "✅ Sua aplicação está rodando com sucesso!"
+IP=$(curl -s http://checkip.amazonaws.com)
+echo "🌐 Acesse em: http://$IP:8080"
 

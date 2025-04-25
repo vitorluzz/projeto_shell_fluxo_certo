@@ -1,13 +1,16 @@
 # Fluxo Certo - Script de Execução
 
-```
-                            ______ _                    _____          _        
-                           |  ____| |                  / ____|        | |       
-                           | |__  | |_   ___  _____   | |     ___ _ __| |_ ___  
-                           |  __| | | | | \ \/ / _ \  | |    / _ \ '__| __/ _ \ 
-                           | |    | | |_| |>  < (_) | | |___|  __/ |  | || (_) |
-                           |_|    |_|\__,_/_/\_\___/   \_____\___|_|   \__\___/ 
-                                                      
+```                                                                                
+             ,,                                                                             
+`7MM"""YMM `7MM                                   .g8"""bgd                   mm            
+  MM    `7   MM                                 .dP'     `M                   MM            
+  MM   d     MM `7MM  `7MM  `7M'   `MF',pW"Wq.  dM'       ` .gP"Ya `7Mb,od8 mmMMmm ,pW"Wq.  
+  MM""MM     MM   MM    MM    `VA ,V' 6W'   `Wb MM         ,M'   Yb  MM' "'   MM  6W'   `Wb 
+  MM   Y     MM   MM    MM      XMX   8M     M8 MM.        8M""""""  MM       MM  8M     M8 
+  MM         MM   MM    MM    ,V' VA. YA.   ,A9 `Mb.     ,'YM.    ,  MM       MM  YA.   ,A9 
+.JMML.     .JMML. `Mbod"YML..AM.   .MA.`Ybmd9'    `"bmmmd'  `Mbmmd'.JMML.     `Mbmo`Ybmd9'  
+                                                                                            
+                                                 
 ```
 
 Este repositório faz parte do projeto **Fluxo Certo** e contém um Shell Script para facilitar a execução e inicialização do ambiente do projeto de forma automatizada.

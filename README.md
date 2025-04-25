@@ -1,16 +1,16 @@
 # Fluxo Certo - Script de Execução
 
 ```                                                                                
-             ,,                                                                             
-`7MM"""YMM `7MM                                   .g8"""bgd                   mm            
-  MM    `7   MM                                 .dP'     `M                   MM            
-  MM   d     MM `7MM  `7MM  `7M'   `MF',pW"Wq.  dM'       ` .gP"Ya `7Mb,od8 mmMMmm ,pW"Wq.  
-  MM""MM     MM   MM    MM    `VA ,V' 6W'   `Wb MM         ,M'   Yb  MM' "'   MM  6W'   `Wb 
-  MM   Y     MM   MM    MM      XMX   8M     M8 MM.        8M""""""  MM       MM  8M     M8 
-  MM         MM   MM    MM    ,V' VA. YA.   ,A9 `Mb.     ,'YM.    ,  MM       MM  YA.   ,A9 
-.JMML.     .JMML. `Mbod"YML..AM.   .MA.`Ybmd9'    `"bmmmd'  `Mbmmd'.JMML.     `Mbmo`Ybmd9'  
-                                                                                            
-                                                 
+
+ ________ ___       ___  ___     ___    ___ ________  ________  _______   ________  _________  ________     
+|\  _____\\  \     |\  \|\  \   |\  \  /  /|\   __  \|\   ____\|\  ___ \ |\   __  \|\___   ___\\   __  \    
+\ \  \__/\ \  \    \ \  \\\  \  \ \  \/  / | \  \|\  \ \  \___|\ \   __/|\ \  \|\  \|___ \  \_\ \  \|\  \   
+ \ \   __\\ \  \    \ \  \\\  \  \ \    / / \ \  \\\  \ \  \    \ \  \_|/_\ \   _  _\   \ \  \ \ \  \\\  \  
+  \ \  \_| \ \  \____\ \  \\\  \  /     \/   \ \  \\\  \ \  \____\ \  \_|\ \ \  \\  \|   \ \  \ \ \  \\\  \ 
+   \ \__\   \ \_______\ \_______\/  /\   \    \ \_______\ \_______\ \_______\ \__\\ _\    \ \__\ \ \_______\
+    \|__|    \|_______|\|_______/__/ /\ __\    \|_______|\|_______|\|_______|\|__|\|__|    \|__|  \|_______|
+                                |__|/ \|__|                                                                 
+                                                                                                            
 ```
 
 Este repositório faz parte do projeto **Fluxo Certo** e contém um Shell Script para facilitar a execução e inicialização do ambiente do projeto de forma automatizada.

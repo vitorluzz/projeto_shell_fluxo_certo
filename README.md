@@ -239,7 +239,7 @@ crontab –e
 
 **9.3** Adicionando o comando para executar o JAR de 1 em 1 semana:
 ```
-0 0 * * 0 /usr/bin/java -jar /home/ubuntu/conexao-banco.jar
+0 0 * * 0 /usr/bin/java -jar /home/ubuntu/extracaoDados.jar
 ```
 
 **9.4** Salve as alterações:

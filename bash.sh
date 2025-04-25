@@ -16,7 +16,7 @@ echo "Iniciando FLUXO-CERTO..."
 echo "Verificação de dependências do sistema..."
 
 echo "Atualizando o SO..."
-sudo apt update && sudo apt upgrade -y
+sudo apt update
 echo "Sistema Operacional atualizado com sucesso!"
 
 # VERIFICAÇÃO DO GIT
@@ -103,10 +103,10 @@ cd ..
 
 # ETL
 echo "Copiando o arquivo JAR que está no docker para dentro da instância..."
-sudo docker cp container_fluxocerto:/usr/src/app/java/conexao-banco/target/conexao-banco-1.0-SNAPSHOT-jar-with-dependencies.jar ./conexao-banco.jar
+sudo docker cp container_fluxocerto:/usr/src/app/java/extracao-dados/target/extracaoDados.jar ./extracaoDados.jar
 
 echo "Executando o JAR"
-java -jar conexao-banco.jar
+java -jar extracaoDados.jar
 
 echo "Tratamento de dados foi um sucesso!"
 

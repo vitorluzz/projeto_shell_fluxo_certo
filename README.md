@@ -77,40 +77,51 @@ export AWS_DEFAULT_REGION=us-east-1  # ou outra região indicada
 **CTRL O + Enter + CTRL X**
 
 ---
+#### 3 - Função/Role na EC2
 
-#### 3 - Criação do bucket S3
+**3.1** Na AWS, nas seleções das instâncias, selecione a sua instâcia e vá em modificar a função do IAM:
 
-**3.1** Crie um bucket S3 com o nome 'dl-fluxo-certo'
+![alt text](./assets/step1.png)
+
+**3.2** Selecione a opção 'LabInstanceProfile':
+
+![alt text](./assets/step2.png)
+
+---
+
+#### 4 - Criação do bucket S3
+
+**4.1** Crie um bucket S3 com o nome 'dl-fluxo-certo'
 > **OBS: O bucket precisa ter exatamente esse nome!!!**
 
 ![alt text](./assets/step.png)
 
 > As configurações do bucket são as padrões.
 
-**3.2** Adicionando ao S3 os dados brutos:
+**4.2** Adicionando ao S3 os dados brutos:
 > Os dados para adicionar estão no diretório 'arquivos' deste repositório.
 
 Execute os comandos:
 
-**3.3** Atualize o Sistema Operacional:
+**4.3** Atualize o Sistema Operacional:
 ```bash
 sudo apt update && sudo apt upgrade -y
 ```
 
-**3.4** Instalando a ferramenta unzip:
+**4.4** Instalando a ferramenta unzip:
 ```bash
 sudo apt install unzip
 
 ```
 
-**3.5** Instalando a ferramenta CLI:
+**4.5** Instalando a ferramenta CLI:
 ```bash
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 unzip awscliv2.zip
 sudo ./aws/install
 ```
 
-**3.6** Upload dos arquivos para o S3:
+**4.6** Upload dos arquivos para o S3:
 
 Subindo o arquivo 1:
 ```bash
@@ -142,17 +153,7 @@ echo "❌ Erro ao fazer upload de '$nome_arquivo2'."
 ```
 ---
 
-#### 4 - Função/Role na EC2
 
-**4.1** Na AWS, nas seleções das instâncias, selecione a sua instâcia e vá em modificar a função do IAM:
-
-![alt text](./assets/step1.png)
-
-**4.2** Selecione a opção 'LabInstanceProfile':
-
-![alt text](./assets/step2.png)
-
----
 
 #### 5 - Configurando o acesso do S3 na instância:
 

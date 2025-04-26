@@ -15,24 +15,7 @@ echo "Iniciando FLUXO-CERTO..."
 
 echo "Verificação de dependências do sistema..."
 
-echo "Atualizando o SO..."
-sudo apt update
-echo "Sistema Operacional atualizado com sucesso!"
-
-# Funções para verificar e instalar
-verificar_git() {
-    echo "Verificando se o Git está instalado..."
-    git --version > /dev/null 2>&1
-    if [ $? -eq 0 ]; then
-        echo "Cliente já possui o Git instalado!"
-    else
-        echo "Cliente não possui o Git instalado!"
-        echo "Instalando o Git..."
-        sudo apt install -y git
-        echo "Instalação do Git concluída!"
-    fi
-}
-
+# Função para verificar e instalar Java
 verificar_java() {
     echo "Verificando se o Java está instalado..."
     java -version > /dev/null 2>&1
@@ -46,7 +29,8 @@ verificar_java() {
     fi
 }
 
-verificar_docker() {
+# Função para verificar e instalar Docker e já iniciar containers
+verificar_docker_e_containers() {
     echo "Verificando se o Docker está instalado..."
     docker --version > /dev/null 2>&1
     if [ $? -eq 0 ]; then
@@ -57,25 +41,17 @@ verificar_docker() {
         sudo apt install -y docker.io
         echo "Instalação do Docker concluída!"
     fi
+
+    echo "Iniciando os serviços do Docker..."
+    sudo systemctl start docker
+
+    # Iniciar containers em paralelo também
+    start_banco &
+    start_site &
+    
+    wait
+    echo "Containers prontos!"
 }
-
-# Rodar tudo em paralelo
-verificar_git &
-verificar_java &
-verificar_docker &
-
-# Esperar todos os processos terminarem
-wait
-
-echo "Verificações e instalações concluídas!"
-
-echo ""
-echo "==============================================================================="
-echo ""
-
-# Iniciar o serviço do Docker
-echo "Iniciando os serviços de docker..."
-sudo systemctl start docker
 
 # Função para o Banco de Dados
 start_banco() {
@@ -119,14 +95,14 @@ start_site() {
     echo "Site Fluxo-Certo pronto."
 }
 
-# Rodar os dois em paralelo
-start_banco &
-start_site &
+# Rodar Docker+containers e Java em paralelo
+verificar_docker_e_containers &
+verificar_java &
 
-# Esperar os dois terminarem
+# Esperar ambos terminarem
 wait
 
-echo "Containers prontos!"
+echo "✅ Ambiente preparado com sucesso!"
 
 echo ""
 echo "==============================================================================="

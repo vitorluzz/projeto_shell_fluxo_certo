@@ -180,7 +180,7 @@ nano ~/.bashrc
 ```bash
 export DB_HOST=jdbc:mysql://localhost:3306/fluxocerto
 export DB_USERNAME=admin
-export DB_PASSWORD=urubu100                                     
+export DB_PASSWORD=urubu100
 ```
 > **Importante ser exatamente desse jeito!**
 

@@ -140,7 +140,7 @@ IP=$(curl -s http://checkip.amazonaws.com)
 echo ""
 echo "🌐 Acesse a aplicação rodando em: http://$IP:8080"
 echo ""
-echo "==============================================================================="
+echo ""
 echo ""
 echo "🔍 Testando conexão..."
 if curl -s --head --request GET "http://$IP:8080" | grep "200 OK" > /dev/null; then

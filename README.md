@@ -33,9 +33,9 @@ Antes de executar o script, certifique-se de que você possui:
 
 ---
 
-### Passo a passo
+## Passo a passo
 
-#### 1 - Criando o repositório:
+### 1 - Criando o repositório:
 
 **1.1** Clone este repositório:
    ```bash
@@ -45,7 +45,7 @@ Antes de executar o script, certifique-se de que você possui:
    
 ---
 
-#### 2 - Configurar as variáveis de ambiente dentro da sua instância EC2:
+### 2 - Configurar as variáveis de ambiente dentro da sua instância EC2:
 
 **2.1** Na tela de laboratório AWS Academy, clique em 'AWS Details':
 ![alt text](./assets/step2-1.png)
@@ -76,7 +76,7 @@ export AWS_DEFAULT_REGION=us-east-1  # ou outra região indicada
 **CTRL O + Enter + CTRL X**
 
 ---
-#### 3 - Função/Role na EC2
+### 3 - Função/Role na EC2
 
 **3.1** Na AWS, nas seleções das instâncias, selecione a sua instâcia e vá em modificar a função do IAM:
 
@@ -88,7 +88,7 @@ export AWS_DEFAULT_REGION=us-east-1  # ou outra região indicada
 
 ---
 
-#### 4 - Criação do bucket S3
+### 4 - Criação do bucket S3
 
 **4.1** Crie um bucket S3 com o nome 'dl-fluxo-certo'
 > **OBS: O bucket precisa ter exatamente esse nome!!!**
@@ -154,7 +154,7 @@ echo "❌ Erro ao fazer upload de '$nome_arquivo2'."
 
 
 
-#### 5 - Configurando o acesso do S3 na instância:
+### 5 - Configurando o acesso do S3 na instância:
 
 **5.1** Acesse as configurações da aws dentro da sua instância:
 
@@ -169,7 +169,7 @@ aws configure
 
 ---
 
-#### 6 - Configure as credenciais do banco de dados:
+### 6 - Configure as credenciais do banco de dados:
 
 **6.1** Acesse o bashrc da sua instância:
 ```bash
@@ -196,7 +196,7 @@ source ~/.bashrc
 
 ---
 
-#### 7 - Configurando o grupo de segurança da instância:
+### 7 - Configurando o grupo de segurança da instância:
 
 Vamos definir uma nova regra de entrada, para que qualquer dispositivo possa acessar o site do projeto:
 
@@ -205,7 +205,7 @@ Vamos definir uma nova regra de entrada, para que qualquer dispositivo possa ace
 > Como nossa aplicação está rodando na porta 8080, definimos uma regra de entrada que qualquer dispositivo possa acessar a aplicação através dessa porta.
 ---
 
-#### 8 - Executando o Script
+### 8 - Executando o Script
 
 **8.1 Vá ao diretório principal desse projeto:**
 ```bash
@@ -224,7 +224,7 @@ chmod +x/script.sh
 ---
 
 **EXTRA:**
-#### 9 - Configurando o CRON (Agendador de Tarefas)
+### 9 - Configurando o CRON (Agendador de Tarefas)
 
 >Vamos agendar a execução do arquivo JAR usando o CRON, garantindo que ele seja executado periodicamente para manter a integridade dos dados.
 

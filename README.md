@@ -214,7 +214,7 @@ cd ~/projeto_shell_fluxo_certo/
 
 **8.2** Dê permissão de execução ao script:
 ```bash
-chmod +x /script.sh
+chmod +x script.sh
 ```
 
 **8.3** Execute o script:

@@ -1,10 +1,11 @@
-CREATE DATABASE IF NOT EXISTS fluxocerto;
-USE fluxocerto;
+CREATE DATABASE IF NOT EXISTS fluxoCerto;
+USE fluxoCerto;
 
-create table if not exists empresa ( 
+
+create table empresa ( 
 	id int primary key auto_increment,
 	nomeEmpresa varchar (45),
-	cnpjEmpresa char(14),
+	cnpjEmpresa char(16),
 	Responsavel varchar (45),
 	nomeFantasia varchar(45),
 	razaoSocial varchar(45),
@@ -13,11 +14,12 @@ create table if not exists empresa (
 
 insert into empresa VALUES(NULL, "nome", "000.000.000-00", "eu", "nome", "nome", "nome@gmail.com");
 
-CREATE TABLE if not exists users (
+CREATE TABLE users (
   id INT AUTO_INCREMENT PRIMARY KEY,
   username VARCHAR(50) NOT NULL,
   cargo varchar(9),
   cpf char(13),
+  email varchar(45),
   linha varchar (10),
   dataNasc date,
   dataEntrada datetime default current_timestamp,
@@ -27,10 +29,10 @@ CREATE TABLE if not exists users (
   constraint ct_responsavel foreign key (fk_responsavel) references users(id),
   constraint ct_empresa foreign key (fk_empresa) references empresa(id),
   constraint chkCargo Check (cargo in ("analista","gestor")),
-  constraint chkLinha check (linha in ("azul", "verde","vermelha"))
+  constraint chkLinha check (linha in ("azul", "verde","vermelha","all"))
 );
 
-CREATE TABLE IF NOT EXISTS demandaPorEstacao(
+CREATE TABLE demandaPorEstacao(
 	id INT PRIMARY KEY auto_increment,
     fk_empresa INT,
     ano VARCHAR(10),
@@ -42,7 +44,7 @@ CREATE TABLE IF NOT EXISTS demandaPorEstacao(
     constraint check (linha in ("azul", "verde","vermelha"))
 );
 
-CREATE TABLE IF NOT EXISTS entradaPorLinha(
+CREATE TABLE entradaPorLinha(
 	id INT PRIMARY KEY auto_increment,
     fk_empresa INT,
     dataColeta DATE,
@@ -54,7 +56,9 @@ CREATE TABLE IF NOT EXISTS entradaPorLinha(
     constraint check (linha in ("azul", "verde","vermelha"))
 );
 
-create table if not exists log (
+
+create table log (
+
 	id int primary key auto_increment,
     fk_empresa INT,
     statusResposta VARCHAR(5),
@@ -63,6 +67,7 @@ create table if not exists log (
     origem varchar(50),
     constraint fk_logEmpresa FOREIGN KEY (fk_empresa) REFERENCES empresa(id)
 );
+
 
 
 CREATE USER 'admin'@'%' IDENTIFIED BY 'urubu100';

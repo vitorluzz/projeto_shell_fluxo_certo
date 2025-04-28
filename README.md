@@ -178,7 +178,7 @@ nano ~/.bashrc
 
 **6.2** Edite ele configurando as chaves de acesso do banco de dados:
 ```bash
-export DB_HOST=jdbc:mysql://localhost:3306/fluxocerto
+export DB_HOST=jdbc:mysql://localhost:3306/fluxoCerto
 export DB_USERNAME=admin
 export DB_PASSWORD=urubu100
 ```

@@ -110,19 +110,37 @@ echo ""
 echo "==============================================================================="
 echo ""
 
-echo "Criando a rede Docker"
+echo "🔧 Criando a rede Docker 'fluxo-net'..."
 
-sudo docker network create fluxo-net
+# Verifica se a rede já existe
+if ! sudo docker network ls | grep -q "fluxo-net"; then
+  sudo docker network create fluxo-net && \
+  echo "✅ Rede 'fluxo-net' criada com sucesso!"
+else
+  echo "ℹ️ A rede 'fluxo-net' já existe. Pulando criação."
+fi
 
-echo "Rede 'fluxo-net' criada!"
+echo ""
 
-echo "Conectando o container do MYSQL na rede"
-sudo docker network connect fluxo-net container-bd
+# Função para conectar container à rede
+conectar_container() {
+  CONTAINER=$1
+  echo "🔗 Conectando o container '$CONTAINER' à rede 'fluxo-net'..."
+  if sudo docker network inspect fluxo-net | grep -q "$CONTAINER"; then
+    echo "ℹ️ O container '$CONTAINER' já está conectado à rede."
+  else
+    sudo docker network connect fluxo-net "$CONTAINER" && \
+    echo "✅ Container '$CONTAINER' conectado com sucesso!"
+  fi
+  echo ""
+}
 
-echo "Conectando o container do site na rede"
-sudo docker network connect fluxo-net container_fluxocerto
+# Conecta os containers
+conectar_container container-bd
+conectar_container container_fluxocerto
 
-echo "✅ A rede Docker foi criada e os containers conectados!"
+echo "🚀 Todos os containers foram conectados à rede 'fluxo-net' com sucesso!"
+
 echo ""
 echo "==============================================================================="
 echo ""

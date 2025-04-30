@@ -110,6 +110,23 @@ echo ""
 echo "==============================================================================="
 echo ""
 
+echo "Criando a rede Docker"
+
+sudo docker network create fluxo-net
+
+echo "Rede 'fluxo-net' criada!"
+
+echo "Conectando o container do MYSQL na rede"
+sudo docker network connect fluxo-net container-bd
+
+echo "Conectando o container do site na rede"
+sudo docker network connect fluxo-net container_fluxocerto
+
+echo "✅ A rede Docker foi criada e os containers conectados!"
+echo ""
+echo "==============================================================================="
+echo ""
+
 echo "Iniciando o processo de ETL..."
 # ETL
 echo "Copiando o arquivo JAR que está no docker para dentro da instância..."

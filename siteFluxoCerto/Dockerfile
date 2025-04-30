@@ -16,7 +16,7 @@ RUN git pull
 # Cria o arquivo .env com as variáveis
 RUN echo "AMBIENTE_PROCESSO=producao\n\
 DB_HOST=container-bd\n\
-DB_DATABASE=fluxocerto\n\
+DB_DATABASE=fluxoCerto\n\
 DB_USER=admin\n\
 DB_PASSWORD=urubu100\n\
 DB_PORT=3306\n\

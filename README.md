@@ -223,8 +223,27 @@ chmod +x script.sh
 ```
 ---
 
+### 9 - Executando o script do JAR
+
+
+**9.1 Vá ao diretório principal desse projeto:**
+```bash
+cd ~/projeto_shell_fluxo_certo/
+```
+
+**9.2** Dê permissão de execução ao script:
+```bash
+chmod +x bash.sh
+```
+
+**9.3** Execute o script:
+```bash
+./bash.sh
+```
+
+---
 **EXTRA:**
-### 9 - Configurando o CRON (Agendador de Tarefas)
+### Configurando o CRON (Agendador de Tarefas)
 
 >Vamos agendar a execução do arquivo JAR usando o CRON, garantindo que ele seja executado periodicamente para manter a integridade dos dados.
 

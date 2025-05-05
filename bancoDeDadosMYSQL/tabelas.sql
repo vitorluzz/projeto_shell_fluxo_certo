@@ -32,6 +32,21 @@ CREATE TABLE users (
   constraint chkLinha check (linha in ("azul", "verde","vermelha","all"))
 );
 
+INSERT INTO users (
+  username, cargo, cpf, email, linha, dataNasc, senha, fk_responsavel, fk_empresa
+) VALUES (
+  'Rosim Marcelo',
+  'gestor',
+  '123.456.789-00',
+  'metro@email.com',
+  'all',
+  '1980-05-01',
+  'senhaSegura123!',
+  NULL,
+  1
+);
+
+
 CREATE TABLE demandaPorEstacao(
     id INT PRIMARY KEY auto_increment,
     fk_empresa INT,

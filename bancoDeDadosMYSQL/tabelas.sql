@@ -18,10 +18,10 @@ CREATE TABLE users (
   id INT AUTO_INCREMENT PRIMARY KEY,
   username VARCHAR(50) NOT NULL,
   cargo varchar(9),
-  cpf char(13),
+  cpf char(20),
   email varchar(45),
   linha varchar (10),
-  dataNasc date,
+  dataNasc varchar(45),
   dataEntrada datetime default current_timestamp,
   senha varchar(100) NOT NULL,
   fk_responsavel int,
@@ -33,7 +33,7 @@ CREATE TABLE users (
 );
 
 CREATE TABLE demandaPorEstacao(
-	id INT PRIMARY KEY auto_increment,
+    id INT PRIMARY KEY auto_increment,
     fk_empresa INT,
     ano VARCHAR(10),
     mes VARCHAR(30),

@@ -221,25 +221,6 @@ chmod +x script.sh
 ```bash
 ./script.sh
 ```
----
-
-### 9 - Executando o script do JAR
-
-
-**9.1 Vá ao diretório principal desse projeto:**
-```bash
-cd ~/projeto_shell_fluxo_certo/
-```
-
-**9.2** Dê permissão de execução ao script:
-```bash
-chmod +x bash.sh
-```
-
-**9.3** Execute o script:
-```bash
-./bash.sh
-```
 
 ---
 **EXTRA:**
@@ -247,21 +228,21 @@ chmod +x bash.sh
 
 >Vamos agendar a execução do arquivo JAR usando o CRON, garantindo que ele seja executado periodicamente para manter a integridade dos dados.
 
-**9.1** Acessando o crontab:
+Acessando o crontab:
 ```bash
 crontab –e
 ```
 
-**9.2** Selecione o editor nano: (OPÇÃO 1)
+Selecione o editor nano: (OPÇÃO 1)
 ![alt text](./assets/image.png)
 
 
-**9.3** Adicionando o comando para executar o JAR de 1 em 1 semana:
+Adicionando o comando para executar o JAR de 1 em 1 semana:
 ```
 0 0 * * 0 /usr/bin/java -jar /home/ubuntu/extracaoDados.jar
 ```
 
-**9.4** Salve as alterações:
+Salve as alterações:
 
 **CTRL + O , ENTER, CTRL + X**
 

@@ -1,0 +1,33 @@
+version: '3.8'
+
+networks:
+  fluxo-net:
+    driver: bridge
+
+volumes:
+  mysql_data:
+
+services:
+  mysql:
+    container_name: container-bd
+    image: vitorluzz/imagem-bd-fluxo-certo
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: urubu100
+      MYSQL_DATABASE: fluxoCerto
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./init-scripts:/docker-entrypoint-initdb.d
+    ports:
+      - "3306:3306"
+    networks:
+      - fluxo-net
+
+  app:
+    container_name: container_fluxocerto
+    image: vitorluzz/fluxocerto
+    restart: always
+    ports:
+      - "8080:8080"
+    networks:
+      - fluxo-net

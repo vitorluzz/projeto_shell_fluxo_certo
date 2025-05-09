@@ -13,80 +13,73 @@ echo "
                                                                                                                                           
 "
 
-echo "Iniciando FLUXO-CERTO..."
 
+echo "Iniciando FLUXO-CERTO..."
 echo "Verificação de dependências do sistema..."
 
-# Função para verificar e instalar Java
-verificar_java() {
-    echo "Verificando se o Java está instalado..."
-    java -version > /dev/null 2>&1
-    if [ $? -eq 0 ]; then
-        echo "Cliente já possui o Java instalado!"
+# Instalação do Java em paralelo
+instalar_java() {
+    echo "🔧 Verificando se o Java está instalado..."
+    if type -p java > /dev/null; then
+        echo "✅ Java já está instalado!"
     else
-        echo "Cliente não possui o Java instalado!"
-        echo "Instalando o Java..."
+        echo "⏳ Java não encontrado. Instalando..."
         sudo apt install -y openjdk-21-jdk
-        echo "Instalação do Java concluída!"
+        echo "✅ Java instalado com sucesso!"
     fi
 }
 
-verificar_docker_e_containers() {
-    echo "Verificando se o Docker está instalado..."
+# Instalação do Docker
+instalar_docker() {
+    echo "🔧 Verificando se o Docker está instalado..."
     if command -v docker > /dev/null 2>&1; then
-        echo "Docker já está instalado!"
+        echo "✅ Docker já está instalado!"
     else
-        echo "Docker não está instalado. Instalando..."
-        sudo apt update && sudo apt install -y docker.io
-        echo "Docker instalado com sucesso!"
+        echo "⏳ Instalando Docker..."
+        sudo apt install -y docker.io
+        echo "✅ Docker instalado com sucesso!"
     fi
 
-    echo "Iniciando o serviço do Docker..."
+    echo "🚀 Iniciando serviço do Docker..."
     sudo systemctl start docker
     sudo systemctl enable docker
-
-    # Instalar Docker Compose em paralelo
-    instalar_docker_compose &
-
-    # Iniciar containers com docker-compose
-    start_containers
-
-    # Esperar instalação do docker-compose finalizar (se ainda estiver rodando)
-    wait
-    echo "Ambiente Docker e containers prontos!"
 }
 
-
-# Função para verificar e instalar o Docker Compose
+# Instalação do Docker Compose
 instalar_docker_compose() {
-    echo "Verificando se o Docker Compose está instalado..."
+    echo "🔧 Verificando se o Docker Compose está instalado..."
     if command -v docker-compose > /dev/null 2>&1; then
-        echo "Docker Compose já está instalado!"
+        echo "✅ Docker Compose já está instalado!"
     else
-        echo "Instalando Docker Compose..."
+        echo "⏳ Instalando Docker Compose..."
         sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
         sudo chmod +x /usr/local/bin/docker-compose
-        echo "Docker Compose instalado com sucesso!"
+        echo "✅ Docker Compose instalado com sucesso!"
     fi
 
-    echo "Verificando versão do Docker Compose..."
+    echo "📦 Versão do Docker Compose:"
     docker-compose version
 }
 
-# Função para iniciar os containers do banco e do site
+# Subir containers com Docker Compose
 start_containers() {
-    echo "Iniciando todos os containers necessários..."
-    sudo docker-compose up -d
-    echo "Todos os containers foram iniciados com sucesso!"
+    echo "🚀 Iniciando containers com Docker Compose..."
+    docker-compose up -d || { echo "❌ Falha ao iniciar os containers!"; exit 1; }
+    echo "✅ Todos os containers foram iniciados com sucesso!"
 }
 
-instalar_docker_compose &
+# Iniciar instalação do Java em paralelo
+instalar_java &
+
+# Fluxo sequencial: Docker → Compose → Containers
+instalar_docker
+instalar_docker_compose
 start_containers
 
-# Esperar ambos terminarem
+# Esperar instalação do Java, se ainda estiver rodando
 wait
 
-echo "✅ Ambiente preparado com sucesso!"
+echo "✅ Ambiente FLUXO-CERTO preparado com sucesso!"
 
 echo ""
 echo "==============================================================================="

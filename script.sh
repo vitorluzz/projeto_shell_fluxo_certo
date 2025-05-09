@@ -31,75 +31,57 @@ verificar_java() {
     fi
 }
 
-# Função para verificar e instalar Docker e já iniciar containers
 verificar_docker_e_containers() {
     echo "Verificando se o Docker está instalado..."
-    docker --version > /dev/null 2>&1
-    if [ $? -eq 0 ]; then
-        echo "Cliente já possui o Docker instalado!"
+    if command -v docker > /dev/null 2>&1; then
+        echo "Docker já está instalado!"
     else
-        echo "Cliente não possui o Docker instalado!"
-        echo "Instalando o Docker..."
-        sudo apt install -y docker.io
-        echo "Instalação do Docker concluída!"
+        echo "Docker não está instalado. Instalando..."
+        sudo apt update && sudo apt install -y docker.io
+        echo "Docker instalado com sucesso!"
     fi
 
-    echo "Iniciando os serviços do Docker..."
+    echo "Iniciando o serviço do Docker..."
     sudo systemctl start docker
+    sudo systemctl enable docker
 
-    # Iniciar containers em paralelo também
-    start_banco &
-    start_site &
-    
+    # Instalar Docker Compose em paralelo
+    instalar_docker_compose &
+
+    # Iniciar containers com docker-compose
+    start_containers
+
+    # Esperar instalação do docker-compose finalizar (se ainda estiver rodando)
     wait
-    echo "Containers prontos!"
+    echo "Ambiente Docker e containers prontos!"
 }
 
-# Função para o Banco de Dados
-start_banco() {
-    echo "Iniciando operações do Banco de Dados..."
-    local dir_banco="./bancoDeDadosMYSQL"
 
-    if [ "$(sudo docker ps -a -q -f name=container-bd)" ]; then
-        echo "Container do banco de dados já existe."
-        if [ "$(sudo docker ps -q -f name=container-bd)" ]; then
-            echo "Container do banco já está em execução."
-        else
-            echo "Iniciando o container do banco de dados..."
-            sudo docker start container-bd
-        fi
+# Função para verificar e instalar o Docker Compose
+instalar_docker_compose() {
+    echo "Verificando se o Docker Compose está instalado..."
+    if command -v docker-compose > /dev/null 2>&1; then
+        echo "Docker Compose já está instalado!"
     else
-        echo "Criando e iniciando o container do banco de dados..."
-        sudo docker build -t imagem-bd-fluxo-certo "$dir_banco"
-        sudo docker run -d --name container-bd -p 3306:3306 imagem-bd-fluxo-certo
+        echo "Instalando Docker Compose..."
+        sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+        sudo chmod +x /usr/local/bin/docker-compose
+        echo "Docker Compose instalado com sucesso!"
     fi
-    echo "Banco de Dados pronto."
+
+    echo "Verificando versão do Docker Compose..."
+    docker-compose version
 }
 
-# Função para o Site Fluxo-Certo
-start_site() {
-    echo "Iniciando operações do Site Fluxo-Certo..."
-    local dir_site="./siteFluxoCerto"
-
-    if [ "$(sudo docker ps -a -q -f name=container_fluxocerto)" ]; then
-        echo "Container do site já existe."
-        if [ "$(sudo docker ps -q -f name=container_fluxocerto)" ]; then
-            echo "Container do site já está em execução."
-        else
-            echo "Iniciando o container do site..."
-            sudo docker start container_fluxocerto
-        fi
-    else
-        echo "Criando e iniciando o container do site..."
-        sudo docker build -t fluxocerto "$dir_site"
-        sudo docker run -d -p 8080:8080 --name container_fluxocerto fluxocerto
-    fi
-    echo "Site Fluxo-Certo pronto."
+# Função para iniciar os containers do banco e do site
+start_containers() {
+    echo "Iniciando todos os containers necessários..."
+    sudo docker-compose up -d
+    echo "Todos os containers foram iniciados com sucesso!"
 }
 
-# Rodar Docker+containers e Java em paralelo
-verificar_docker_e_containers &
-verificar_java &
+instalar_docker_compose &
+start_containers
 
 # Esperar ambos terminarem
 wait
@@ -110,37 +92,51 @@ echo ""
 echo "==============================================================================="
 echo ""
 
-echo "🔧 Criando a rede Docker 'fluxo-net'..."
+echo "Iniciando o processo de ETL..."
+# ETL
+echo "Copiando o arquivo JAR que está no docker para dentro da instância..."
+sudo docker cp container_fluxocerto:/usr/src/app/java/extracao-dados/target/extracaoDados.jar ./extracaoDados.jar
 
-# Verifica se a rede já existe
-if ! sudo docker network ls | grep -q "fluxo-net"; then
-  sudo docker network create fluxo-net && \
-  echo "✅ Rede 'fluxo-net' criada com sucesso!"
-else
-  echo "ℹ️ A rede 'fluxo-net' já existe. Pulando criação."
-fi
+echo "Executando o JAR"
+java -jar extracaoDados.jar
 
-echo ""
-
-# Função para conectar container à rede
-conectar_container() {
-  CONTAINER=$1
-  echo "🔗 Conectando o container '$CONTAINER' à rede 'fluxo-net'..."
-  if sudo docker network inspect fluxo-net | grep -q "$CONTAINER"; then
-    echo "ℹ️ O container '$CONTAINER' já está conectado à rede."
-  else
-    sudo docker network connect fluxo-net "$CONTAINER" && \
-    echo "✅ Container '$CONTAINER' conectado com sucesso!"
-  fi
-  echo ""
-}
-
-# Conecta os containers
-conectar_container container-bd
-conectar_container container_fluxocerto
-
-echo "🚀 Todos os containers foram conectados à rede 'fluxo-net' com sucesso!"
+echo "Tratamento de dados foi um sucesso!"
 
 echo ""
 echo "==============================================================================="
 echo ""
+
+
+echo "  
+ 
+███████╗██╗     ██╗   ██╗██╗  ██╗ ██████╗  ██████╗███████╗██████╗ ████████╗ ██████╗ 
+██╔════╝██║     ██║   ██║╚██╗██╔╝██╔═══██╗██╔════╝██╔════╝██╔══██╗╚══██╔══╝██╔═══██╗
+█████╗  ██║     ██║   ██║ ╚███╔╝ ██║   ██║██║     █████╗  ██████╔╝   ██║   ██║   ██║
+██╔══╝  ██║     ██║   ██║ ██╔██╗ ██║   ██║██║     ██╔══╝  ██╔══██╗   ██║   ██║   ██║
+██║     ███████╗╚██████╔╝██╔╝ ██╗╚██████╔╝╚██████╗███████╗██║  ██║   ██║   ╚██████╔╝
+╚═╝     ╚══════╝ ╚═════╝ ╚═╝  ╚═╝ ╚═════╝  ╚═════╝╚══════╝╚═╝  ╚═╝   ╚═╝    ╚═════╝ 
+                                                      
+"
+echo "✅ Sua aplicação está rodando com sucesso!"
+IP=$(curl -s http://checkip.amazonaws.com)
+echo ""
+echo "🌐 Acesse a aplicação rodando em: http://$IP:8080"
+echo ""
+echo ""
+echo ""
+echo "🔍 Testando conexão..."
+if curl -s --head --request GET "http://$IP:8080" | grep "200 OK" > /dev/null; then
+    echo "✅ Conexão bem-sucedida! Tudo certo!"
+else
+    echo "⚠️ Atenção: Não foi possível validar a conexão automaticamente."
+    echo "   Verifique se os containers estão rodando ou tente novamente em alguns segundos."
+fi
+
+# Mostrar o tempo total
+END_TIME=$(date +%s)
+ELAPSED_TIME=$((END_TIME - START_TIME))
+
+echo ""
+echo "⏱️ Tempo total de preparação: ${ELAPSED_TIME} segundos."
+echo ""
+echo "==============================================================================="

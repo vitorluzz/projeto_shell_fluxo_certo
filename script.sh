@@ -68,6 +68,16 @@ start_containers() {
     echo "✅ Todos os containers foram iniciados com sucesso!"
 }
 
+# Aguardar o MySQL estar acessível
+esperar_mysql() {
+    echo "⏳ Aguardando o MySQL iniciar (pode levar alguns segundos)..."
+    until docker exec container-bd mysqladmin ping -h"localhost" --silent; do
+        printf "."
+        sleep 2
+    done
+    echo "✅ MySQL está pronto para conexões!"
+}
+
 # Iniciar instalação do Java em paralelo
 instalar_java &
 
@@ -75,9 +85,12 @@ instalar_java &
 instalar_docker
 instalar_docker_compose
 start_containers
+esperar_mysql
 
 # Esperar instalação do Java, se ainda estiver rodando
 wait
+
+
 
 echo "✅ Ambiente FLUXO-CERTO preparado com sucesso!"
 

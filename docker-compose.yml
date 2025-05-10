@@ -1,5 +1,3 @@
-version: '3.8'
-
 networks:
   fluxo-net:
     driver: bridge
@@ -10,7 +8,7 @@ volumes:
 services:
   mysql:
     container_name: container-bd
-    image: vitorluzz/imagem-bd-fluxo-certo
+    image: vitorluzz/bd-fluxocerto
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: urubu100

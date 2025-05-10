@@ -71,7 +71,7 @@ start_containers() {
 # Aguardar o MySQL estar acessível
 esperar_mysql() {
     echo "⏳ Aguardando o MySQL iniciar (pode levar alguns segundos)..."
-    until docker exec container-bd mysqladmin ping -h"localhost" --silent; do
+    until sudo docker exec container-bd mysqladmin ping -h"localhost" -uroot -purubu100 --silent; do
         printf "."
         sleep 2
     done

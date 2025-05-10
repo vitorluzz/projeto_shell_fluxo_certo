@@ -5,7 +5,7 @@ USE fluxoCerto;
 create table empresa ( 
 	id int primary key auto_increment,
 	nomeEmpresa varchar (45),
-	cnpjEmpresa char(16),
+	cnpjEmpresa varchar(16),
 	Responsavel varchar (45),
 	nomeFantasia varchar(45),
 	razaoSocial varchar(45),

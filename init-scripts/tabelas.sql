@@ -12,7 +12,21 @@ create table empresa (
 	email varchar(45)
 );
 
-insert into empresa VALUES(NULL, "nome", "000.000.000-00", "eu", "nome", "nome", "nome@gmail.com");
+INSERT INTO empresa (
+  nomeEmpresa, 
+  cnpjEmpresa, 
+  Responsavel, 
+  nomeFantasia, 
+  razaoSocial, 
+  email
+) VALUES (
+  'Companhia do Metropolitano de São Paulo',
+  '62.584.525/0001-00',
+  'Carlos Roberto Vieira',
+  'Metrô de São Paulo',
+  'Companhia do Metropolitano de São Paulo',
+  'metro@email.com'
+);
 
 CREATE TABLE users (
   id INT AUTO_INCREMENT PRIMARY KEY,

@@ -98,6 +98,44 @@ echo ""
 echo "==============================================================================="
 echo ""
 
+
+echo "🚀 Iniciando configuração de rede e proxy reverso..."
+
+echo "📦 Instalando o Nginx..."
+sudo apt install nginx -y || handle_error "ERRO AO INSTALAR O NGINX"
+
+echo "🔧 Criando configuração do Nginx para fluxocerto.duckdns.org..."
+sudo bash -c 'cat > /etc/nginx/sites-available/fluxocerto <<EOF
+server {
+    listen 80;
+    server_name fluxocerto.duckdns.org;
+
+    location / {
+        proxy_pass http://localhost:8080;
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+    }
+}
+EOF' || handle_error "ERRO AO CRIAR O ARQUIVO DE CONFIGURAÇÃO DO NGINX"
+
+echo "🔗 Ativando o site e removendo o default..."
+sudo ln -sf /etc/nginx/sites-available/fluxocerto /etc/nginx/sites-enabled/fluxocerto || handle_error "ERRO AO ATIVAR O SITE"
+sudo rm -f /etc/nginx/sites-enabled/default || handle_error "ERRO AO REMOVER O SITE PADRÃO"
+
+echo "🧪 Testando configuração do Nginx..."
+sudo nginx -t || handle_error "CONFIGURAÇÃO INVÁLIDA DO NGINX"
+
+echo "🔄 Reiniciando o Nginx..."
+sudo systemctl restart nginx || handle_error "ERRO AO REINICIAR O NGINX"
+
+echo "✅ Proxy reverso configurado com sucesso!"
+
+
+echo ""
+echo "==============================================================================="
+echo ""
+
 echo "Iniciando o processo de ETL..."
 # ETL
 echo "Copiando o arquivo JAR que está no docker para dentro da instância..."
@@ -126,7 +164,7 @@ echo "
 echo "✅ Sua aplicação está rodando com sucesso!"
 IP=$(curl -s http://checkip.amazonaws.com)
 echo ""
-echo "🌐 Acesse a aplicação rodando em: http://$IP:8080"
+echo "🌐 Acesse a aplicação rodando em: http://fluxocerto.duckdns.org/"
 echo ""
 echo ""
 echo ""

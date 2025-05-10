@@ -58,13 +58,13 @@ instalar_docker_compose() {
     fi
 
     echo "📦 Versão do Docker Compose:"
-    docker-compose version
+    sudo docker-compose version
 }
 
 # Subir containers com Docker Compose
 start_containers() {
     echo "🚀 Iniciando containers com Docker Compose..."
-    docker-compose up -d || { echo "❌ Falha ao iniciar os containers!"; exit 1; }
+    sudo docker-compose up -d || { echo "❌ Falha ao iniciar os containers!"; exit 1; }
     echo "✅ Todos os containers foram iniciados com sucesso!"
 }
 

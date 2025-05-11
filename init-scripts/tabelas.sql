@@ -21,7 +21,7 @@ INSERT INTO empresa (
   email
 ) VALUES (
   'Companhia do Metropolitano de São Paulo',
-  '62.584.525/0001-00',
+  '62584525000100',
   'Carlos Roberto Vieira',
   'Metrô de São Paulo',
   'Companhia do Metropolitano de São Paulo',

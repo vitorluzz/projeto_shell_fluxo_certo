@@ -27,6 +27,7 @@ instalar_java() {
     if type -p java > /dev/null; then
         echo "✅ Java já está instalado!"
     else
+        esperar_liberacao_apt
         echo "⏳ Java não encontrado. Instalando..."
         sudo apt install -y openjdk-21-jdk
         echo "✅ Java instalado com sucesso!"

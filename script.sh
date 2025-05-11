@@ -85,19 +85,14 @@ esperar_mysql() {
     echo "✅ MySQL está pronto para conexões!"
 }
 
-# Iniciar instalação do Java em paralelo
+# Iniciar instalação do Docker e Java em paralelo
 
 instalar_docker &
 instalar_java 
 
-# Fluxo sequencial: Docker → Compose → Containers
-
-
-esperar_mysql
-
-# Esperar instalação do Java, se ainda estiver rodando
 wait
 
+esperar_mysql
 
 
 echo "✅ Ambiente FLUXO-CERTO preparado com sucesso!"

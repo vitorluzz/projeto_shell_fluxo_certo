@@ -104,14 +104,28 @@ echo ""
 
 echo "🚀 Iniciando configuração de rede e proxy reverso..."
 
-esperar_liberacao_apt() {
-    echo "⏳ Aguardando liberação do APT..."
-    while sudo fuser /var/lib/dpkg/lock-frontend >/dev/null 2>&1 ; do
-        sleep 2
-    done
-}
+limpando_apt() {
+    echo "⏳ Limpando possíveis travas do APT..."
 
-esperar_liberacao_apt
+    # Encontra e mata qualquer processo que esteja usando o lock do apt
+    pid=$(lsof /var/lib/dpkg/lock-frontend | awk 'NR==2 {print $2}')
+    
+    if [ -n "$pid" ]; then
+        echo "🔪 Matando processo que segura o lock (PID: $pid)..."
+        sudo kill -9 "$pid"
+    else
+        echo "✅ Nenhum processo segurando o lock do APT."
+    fi
+
+    echo "🧹 Removendo arquivos de lock..."
+    sudo rm -f /var/lib/dpkg/lock-frontend
+    sudo rm -f /var/lib/dpkg/lock
+
+    echo "🔄 Reconfigurando pacotes pendentes..."
+    sudo dpkg --configure -a
+
+    echo "✅ Limpeza do APT concluída!"
+}
 
 echo "📦 Instalando o Nginx..."
 sudo apt install nginx -y || handle_error "ERRO AO INSTALAR O NGINX"

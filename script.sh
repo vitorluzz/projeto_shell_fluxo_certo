@@ -13,6 +13,10 @@ echo "
                                                                                                                                           
 "
 
+handle_error() {
+    echo "❌ $1"
+    exit 1
+}
 
 echo "Iniciando FLUXO-CERTO..."
 echo "Verificação de dependências do sistema..."
@@ -100,6 +104,15 @@ echo ""
 
 
 echo "🚀 Iniciando configuração de rede e proxy reverso..."
+
+esperar_liberacao_apt() {
+    echo "⏳ Aguardando liberação do APT..."
+    while sudo fuser /var/lib/dpkg/lock-frontend >/dev/null 2>&1 ; do
+        sleep 2
+    done
+}
+
+esperar_liberacao_apt
 
 echo "📦 Instalando o Nginx..."
 sudo apt install nginx -y || handle_error "ERRO AO INSTALAR O NGINX"

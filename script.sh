@@ -48,6 +48,7 @@ instalar_docker() {
     echo "🚀 Iniciando serviço do Docker..."
     sudo systemctl start docker
     sudo systemctl enable docker
+    instalar_docker_compose
 }
 
 # Instalação do Docker Compose
@@ -64,6 +65,7 @@ instalar_docker_compose() {
 
     echo "📦 Versão do Docker Compose:"
     sudo docker-compose version
+    start_containers
 }
 
 # Subir containers com Docker Compose
@@ -84,12 +86,13 @@ esperar_mysql() {
 }
 
 # Iniciar instalação do Java em paralelo
-instalar_java &
+
+instalar_docker &
+instalar_java 
 
 # Fluxo sequencial: Docker → Compose → Containers
-instalar_docker
-instalar_docker_compose
-start_containers
+
+
 esperar_mysql
 
 # Esperar instalação do Java, se ainda estiver rodando

@@ -127,6 +127,8 @@ limpando_apt() {
     echo "✅ Limpeza do APT concluída!"
 }
 
+limpando_apt
+
 echo "📦 Instalando o Nginx..."
 sudo apt install nginx -y || handle_error "ERRO AO INSTALAR O NGINX"
 

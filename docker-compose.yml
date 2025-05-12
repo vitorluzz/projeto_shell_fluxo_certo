@@ -32,7 +32,7 @@ services:
     networks:
       - fluxo-net
 
-container-java:
+  container-java:
     container_name: container-java
     image: openjdk:21-slim
     networks:

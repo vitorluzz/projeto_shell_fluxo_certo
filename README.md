@@ -2,12 +2,12 @@
 
 ```                                                                                
 
-███████╗██╗     ██╗   ██╗██╗  ██╗ ██████╗        ██████╗███████╗██████╗ ████████╗ ██████╗
-██╔════╝██║     ██║   ██║╚██╗██╔╝██╔═══██╗      ██╔════╝██╔════╝██╔══██╗╚══██╔══╝██╔═══██╗
-█████╗  ██║     ██║   ██║ ╚███╔╝ ██║   ██║      ██║     █████╗  ██████╔╝   ██║   ██║   ██║
-██╔══╝  ██║     ██║   ██║ ██╔██╗ ██║   ██║      ██║     ██╔══╝  ██╔══██╗   ██║   ██║   ██║
-██║     ███████╗╚██████╔╝██╔╝ ██╗╚██████╔╝      ╚██████╗███████╗██║  ██║   ██║   ╚██████╔╝
-╚═╝     ╚══════╝ ╚═════╝ ╚═╝  ╚═╝ ╚═════╝        ╚═════╝╚══════╝╚═╝  ╚═╝   ╚═╝    ╚═════╝
+      ███████╗██╗     ██╗   ██╗██╗  ██╗ ██████╗        ██████╗███████╗██████╗ ████████╗ ██████╗
+      ██╔════╝██║     ██║   ██║╚██╗██╔╝██╔═══██╗      ██╔════╝██╔════╝██╔══██╗╚══██╔══╝██╔═══██╗
+      █████╗  ██║     ██║   ██║ ╚███╔╝ ██║   ██║      ██║     █████╗  ██████╔╝   ██║   ██║   ██║
+      ██╔══╝  ██║     ██║   ██║ ██╔██╗ ██║   ██║      ██║     ██╔══╝  ██╔══██╗   ██║   ██║   ██║
+      ██║     ███████╗╚██████╔╝██╔╝ ██╗╚██████╔╝      ╚██████╗███████╗██║  ██║   ██║   ╚██████╔╝
+      ╚═╝     ╚══════╝ ╚═════╝ ╚═╝  ╚═╝ ╚═════╝        ╚═════╝╚══════╝╚═╝  ╚═╝   ╚═╝    ╚═════╝
 
 ```
 
@@ -207,24 +207,39 @@ Vamos definir uma nova regra de entrada, para que qualquer dispositivo possa ace
 > Como nossa aplicação está rodando na porta 8080, definimos uma regra de entrada que qualquer dispositivo possa acessar a aplicação através dessa porta.
 ---
 
-### 8 - Executando o Script
+### 8 - Executando o Script Para Criação do Ambiente
 
-**8.1 Vá ao diretório principal desse projeto:**
+Vamos executar o primeiro script para criação do ambiente:
+
+**8.1** Dê permissão de execução ao script:
 ```bash
-cd ~/projeto_shell_fluxo_certo/
+chmod +x ambiente.sh
 ```
 
-**8.2** Dê permissão de execução ao script:
+**8.2** Execute o script:
 ```bash
-chmod +x script.sh
+./ambiente.sh
+```
+> Pronto, temos o java, docker, docker-compose e nossos containers contendo a aplicação node e o banco de dados mysql.
+
+
+### 9 - Executando o Script ETL
+
+Vamos executar o segundo script o processo ETL (Extract, Transform and Load):
+
+**9.1** Dê permissão de execução ao script:
+```bash
+chmod +x etl.sh
 ```
 
-**8.3** Execute o script:
+**9.2** Execute o script:
 ```bash
-./script.sh
+./etl.sh
 ```
+> Pronto, temos o java, docker, docker-compose e nossos containers contendo a aplicação node e o banco de dados mysql.
 
 ---
+
 **EXTRA:**
 ### Configurando o CRON (Agendador de Tarefas)
 

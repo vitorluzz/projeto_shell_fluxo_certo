@@ -24,20 +24,10 @@ services:
       - fluxo-net
 
   app:
-    container_name: container-fluxocerto
+    container_name: container_fluxocerto
     image: vitorluzz/fluxocerto
     restart: always
     ports:
       - "8080:8080"
     networks:
       - fluxo-net
-
-  container-java:
-    container_name: container-java
-    image: openjdk:21-slim
-    networks:
-      - fluxo-net
-    volumes:
-      - ./java:/app
-    working_dir: /app
-    command: ["sleep", "infinity"]

@@ -24,7 +24,7 @@ services:
       - fluxo-net
 
   app:
-    container_name: container_fluxocerto
+    container_name: container-fluxocerto
     image: vitorluzz/fluxocerto
     restart: always
     ports:
@@ -32,8 +32,8 @@ services:
     networks:
       - fluxo-net
 
-  java21:
-    container_name: container_java21
+  java:
+    container_name: container-java
     image: openjdk:21-jdk
     tty: true
     networks:

@@ -31,3 +31,10 @@ services:
       - "8080:8080"
     networks:
       - fluxo-net
+
+  java21:
+    container_name: container_java21
+    image: openjdk:21-jdk
+    tty: true
+    networks:
+      - fluxo-net

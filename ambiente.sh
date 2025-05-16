@@ -165,3 +165,54 @@ echo ""
 echo "==============================================================================="
 echo ""
 
+echo "Configurando as variáveis de ambiente AWS..."
+if java -jar catch-tokens.jar; then
+  echo "✅ Tokens AWS capturados com sucesso."
+else
+  echo "❌ Erro ao executar catch-tokens.jar."
+  exit 1
+fi
+
+echo ""
+echo "Adicionando as credenciais do banco de dados no arquivo aws_credentials.txt..."
+if echo -e "export DB_HOST=jdbc:mysql://localhost:3306/fluxoCerto\nexport DB_USERNAME=admin\nexport DB_PASSWORD=urubu100" >> aws_credentials.txt; then
+  echo "✅ Credenciais do banco adicionadas ao arquivo."
+else
+  echo "❌ Erro ao adicionar credenciais ao arquivo."
+  exit 1
+fi
+
+echo ""
+echo "Enviando o arquivo com as credenciais para o container Java..."
+if sudo docker cp aws_credentials.txt container_java:/home/aws_credentials.txt; then
+  echo "✅ Arquivo copiado para o container com sucesso."
+else
+  echo "❌ Erro ao copiar arquivo para o container."
+  exit 1
+fi
+
+echo ""
+echo "Adicionando as credenciais no bashrc do container..."
+if sudo docker exec container_java sh -c 'cat /home/aws_credentials.txt >> ~/.bashrc'; then
+  echo "✅ bashrc atualizado com sucesso."
+else
+  echo "❌ Erro ao atualizar o bashrc no container."
+  exit 1
+fi
+
+echo ""
+echo "Atualizando o bashrc do container..."
+if sudo docker exec container_java sh -c 'source ~/.bashrc'; then
+  echo "✅ Variáveis carregadas no bashrc do container."
+else
+  echo "⚠️ Não foi possível aplicar as variáveis com source (isso é comum em exec)."
+fi
+
+echo ""
+echo "✅ Variáveis de ambiente AWS e Banco de Dados configuradas com sucesso!"
+echo ""
+
+echo ""
+echo "==============================================================================="
+echo ""
+

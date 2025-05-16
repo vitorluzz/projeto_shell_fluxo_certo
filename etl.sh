@@ -5,10 +5,14 @@ START_TIME=$(date +%s)
 echo "Iniciando o processo de ETL..."
 # ETL
 echo "Copiando o arquivo JAR que está no docker para dentro da instância..."
-sudo docker cp container_fluxocerto:/usr/src/app/java/extracao-dados/target/extracaoDados.jar ./extracaoDados.jar
+sudo docker cp container-fluxocerto:/usr/src/app/java/extracao-dados/target/extracaoDados.jar ./extracaoDados.jar
 
-echo "Executando o JAR"
-java -jar extracaoDados.jar
+echo "Copiando o arquivo JAR para dentro do container Java..."
+sudo docker cp ./extracaoDados.jar container_java:/home/extracaoDados.jar
+
+
+echo "Executando o JAR dentro do container Java..."
+sudo docker exec -it container_java java -jar /home/extracaoDados.jar
 
 echo "Tratamento de dados foi um sucesso!"
 

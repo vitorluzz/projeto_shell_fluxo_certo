@@ -24,7 +24,7 @@ services:
       - fluxo-net
 
   app:
-    container_name: container-fluxocerto
+    container_name: container_fluxocerto
     image: vitorluzz/fluxocerto
     restart: always
     ports:

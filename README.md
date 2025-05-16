@@ -256,7 +256,7 @@ Selecione o editor nano: (OPÇÃO 1)
 
 Adicionando o comando para executar o JAR de 1 em 1 semana:
 ```
-0 0 * * 0 /usr/bin/java -jar /home/ubuntu/extracaoDados.jar
+0 0 * * 0 docker exec container_java java -jar /home/extracaoDados.jar
 ```
 
 Salve as alterações:

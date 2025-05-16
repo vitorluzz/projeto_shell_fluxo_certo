@@ -38,3 +38,7 @@ services:
     tty: true
     networks:
       - fluxo-net
+    environment:
+      - DB_HOST=jdbc:mysql://mysql:3306/fluxoCerto
+      - DB_USERNAME=admin
+      - DB_PASSWORD=urubu100

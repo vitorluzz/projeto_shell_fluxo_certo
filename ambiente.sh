@@ -154,13 +154,6 @@ sudo systemctl restart nginx || handle_error "ERRO AO REINICIAR O NGINX"
 
 echo "✅ Proxy reverso configurado com sucesso!"
 
-# Mostrar o tempo total
-END_TIME=$(date +%s)
-ELAPSED_TIME=$((END_TIME - START_TIME))
-
-echo ""
-echo "⏱️ Tempo total de preparação do ambiente: ${ELAPSED_TIME} segundos."
-
 echo ""
 echo "==============================================================================="
 echo ""
@@ -175,7 +168,7 @@ fi
 
 echo ""
 echo "Adicionando as credenciais do banco de dados no arquivo aws_credentials.txt..."
-if echo -e "\nexport DB_HOST=jdbc:mysql://localhost:3306/fluxoCerto\nexport DB_USERNAME=admin\nexport DB_PASSWORD=urubu100" >> aws_credentials.txt; then
+if echo -e "\nexport DB_HOST=jdbc:mysql://mysql:3306/fluxoCerto\nexport DB_USERNAME=admin\nexport DB_PASSWORD=urubu100" >> aws_credentials.txt; then
   echo "✅ Credenciais do banco adicionadas ao arquivo."
 else
   echo "❌ Erro ao adicionar credenciais ao arquivo."
@@ -211,6 +204,15 @@ fi
 echo ""
 echo "✅ Variáveis de ambiente AWS e Banco de Dados configuradas com sucesso!"
 echo ""
+
+
+# Mostrar o tempo total
+END_TIME=$(date +%s)
+ELAPSED_TIME=$((END_TIME - START_TIME))
+
+echo ""
+echo "⏱️ Tempo total de preparação do ambiente: ${ELAPSED_TIME} segundos."
+
 
 echo ""
 echo "==============================================================================="

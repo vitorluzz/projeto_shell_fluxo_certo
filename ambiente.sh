@@ -175,7 +175,7 @@ fi
 
 echo ""
 echo "Adicionando as credenciais do banco de dados no arquivo aws_credentials.txt..."
-if echo -e "export DB_HOST=jdbc:mysql://localhost:3306/fluxoCerto\nexport DB_USERNAME=admin\nexport DB_PASSWORD=urubu100" >> aws_credentials.txt; then
+if echo -e "\nexport DB_HOST=jdbc:mysql://localhost:3306/fluxoCerto\nexport DB_USERNAME=admin\nexport DB_PASSWORD=urubu100" >> aws_credentials.txt; then
   echo "✅ Credenciais do banco adicionadas ao arquivo."
 else
   echo "❌ Erro ao adicionar credenciais ao arquivo."

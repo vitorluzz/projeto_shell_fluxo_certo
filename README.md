@@ -71,7 +71,7 @@ Antes de executar o script, certifique-se de que você possui:
 > Os dados para adicionar estão no diretório 'arquivos' deste repositório.
 
 Basta selecionar o S3 e clicar em 'Carregar', e então arrastar os arquivos para adiciona-los, depois, clique em 'Carregar':
-![alt text](image.png)
+![alt text](./assets/image.png)
 
 > Após isso, temos as bases de dados brutos carregadas em nosso Data Lake.
 
@@ -81,7 +81,7 @@ Basta selecionar o S3 e clicar em 'Carregar', e então arrastar os arquivos para
 
 Vamos definir algumas novas regras de entrada, para a aplicação rodar corretamente:
 
-![alt text](image-1.png)
+![alt text](./assets/image-1.png)
 
 **Configuração de Rede e Serviços da Aplicação**
 

@@ -37,6 +37,7 @@ echo ""
 echo "🌐 Acesse a aplicação rodando em: http://fluxocerto.duckdns.org/"
 echo ""
 echo ""
+echo "🔗 Ou então, caso não tenha acesso ao IP Fixo do DuckDNS, acesse a aplicação rodando em: http://$IP:8080"
 echo ""
 echo "🔍 Testando conexão..."
 if curl -s --head --request GET "http://$IP:8080" | grep "200 OK" > /dev/null; then

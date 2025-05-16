@@ -135,7 +135,7 @@ crontab –e
 ```
 
 **6.3** Selecione o editor nano: (OPÇÃO 1)
-![alt text](./assets/image.png)
+![alt text](./assets/image-cron.png)
 
 
 **6.3** Adicionando o comando para executar o JAR dentro do container de 1 em 1 semana:

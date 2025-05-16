@@ -12,7 +12,7 @@ sudo docker cp ./extracaoDados.jar container-java:/home/extracaoDados.jar
 
 
 echo "Executando o JAR dentro do container Java..."
-sudo docker exec -it container-java java -jar /home/extracaoDados.jar
+sudo docker exec container-java bash -c "source ~/.bashrc && java -jar /home/extracaoDados.jar"
 
 echo "Tratamento de dados foi um sucesso!"
 

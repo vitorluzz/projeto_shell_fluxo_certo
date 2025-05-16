@@ -184,7 +184,7 @@ fi
 
 echo ""
 echo "Enviando o arquivo com as credenciais para o container Java..."
-if sudo docker cp aws_credentials.txt container_java:/home/aws_credentials.txt; then
+if sudo docker cp aws_credentials.txt container-java:/home/aws_credentials.txt; then
   echo "✅ Arquivo copiado para o container com sucesso."
 else
   echo "❌ Erro ao copiar arquivo para o container."
@@ -193,7 +193,7 @@ fi
 
 echo ""
 echo "Adicionando as credenciais no bashrc do container..."
-if sudo docker exec container_java sh -c 'cat /home/aws_credentials.txt >> ~/.bashrc'; then
+if sudo docker exec container-java sh -c 'cat /home/aws_credentials.txt >> ~/.bashrc'; then
   echo "✅ bashrc atualizado com sucesso."
 else
   echo "❌ Erro ao atualizar o bashrc no container."
@@ -202,7 +202,7 @@ fi
 
 echo ""
 echo "Atualizando o bashrc do container..."
-if sudo docker exec container_java sh -c 'source ~/.bashrc'; then
+if sudo docker exec container-java sh -c 'source ~/.bashrc'; then
   echo "✅ Variáveis carregadas no bashrc do container."
 else
   echo "⚠️ Não foi possível aplicar as variáveis com source (isso é comum em exec)."

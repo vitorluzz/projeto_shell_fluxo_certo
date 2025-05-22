@@ -28,9 +28,9 @@ O objetivo deste script é:
 
 Antes de executar o script, certifique-se de que você possui:
 
-- Linux ou WSL no Windows (ambiente Unix-like)
+- Máquina AWS EC2
+- Ambiente Linux
 - Permissões para executar scripts `.sh`
-- Dependências básicas como: `bash`, `curl`, `git`, `docker`, etc.
 - Instância com boa capacidade de armazenamento.
 
 ---

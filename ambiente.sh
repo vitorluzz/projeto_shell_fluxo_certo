@@ -180,7 +180,7 @@ fi
 
 echo ""
 echo "Adicionando as variáveis de ambiente do Slack..."
-if echo -e "\nexport URL_WEBHOOK=https://hooks.slack.com/services/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" >> aws_credentials.txt; then
+if echo -e '\nexport URL_WEBHOOK="https://hooks.slack.com/services/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"' >> aws_credentials.txt; then
   echo "✅ Credenciais do Slack adicionadas ao arquivo."
 else
   echo "❌ Erro ao adicionar credenciais do Slack ao arquivo."

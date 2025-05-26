@@ -178,6 +178,22 @@ else
   exit 1
 fi
 
+
+echo ""
+echo "Adicionando o webhook ao arquivo aws_credentials.txt..."
+if { 
+  echo -e "\nexport URL_WEBHOOK=" >> aws_credentials.txt
+  echo -n "https://hooks.slack.com/services/T08T0LLJT9T" >> aws_credentials.txt
+  echo -n "/B08TZRS8N2Z" >> aws_credentials.txt
+  echo "/Mwh7UP8eVmKgnn55KsC77Zzj" >> aws_credentials.txt
+}; then
+  echo "✅ Webhook adicionado ao arquivo."
+else
+  echo "❌ Erro ao adicionar o webhook ao arquivo."
+  exit 1
+fi
+
+
 echo ""
 echo "Enviando o arquivo com as credenciais para o container Java..."
 if sudo docker cp aws_credentials.txt container-java:/home/aws_credentials.txt; then

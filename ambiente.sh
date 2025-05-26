@@ -181,8 +181,10 @@ fi
 
 echo ""
 echo "Adicionando o webhook ao arquivo aws_credentials.txt..."
-if { 
-  echo -e "\nexport URL_WEBHOOK=" >> aws_credentials.txt
+if {
+  # Primeira linha: export URL_WEBHOOK=
+  echo -n "export URL_WEBHOOK=" >> aws_credentials.txt
+  # Continuar na mesma linha, adicionando a URL em partes
   echo -n "https://hooks.slack.com/services/T08T0LLJT9T" >> aws_credentials.txt
   echo -n "/B08TZRS8N2Z" >> aws_credentials.txt
   echo "/Mwh7UP8eVmKgnn55KsC77Zzj" >> aws_credentials.txt

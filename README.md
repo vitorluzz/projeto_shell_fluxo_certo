@@ -35,7 +35,7 @@ Antes de executar o script, certifique-se de que você possui:
 
 ---
 
-## Passo a passo
+## Passo a passo - Processo de utilização
 
 ### 1 - Criando o repositório:
 
@@ -147,7 +147,15 @@ crontab –e
 
 **CTRL + O , ENTER, CTRL + X**
 
+---
 
+## Iniciando ambiente já criado
+
+Caso você já tenha o ambiente criado, utilize o script de inicialização do ambiente:
+```bash
+chmod +x start-env.sh
+./start-env.sh
+```
 
 
 

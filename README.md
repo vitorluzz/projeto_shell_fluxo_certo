@@ -157,5 +157,13 @@ chmod +x start-env.sh
 ./start-env.sh
 ```
 
+#### **ATENÇÃO!!**
+
+Utilize o usuário ubuntu para se conectar à instância, exemplo:
+
+```bash
+ssh -i "chave_projeto.pem" ubuntu@ec2-54-145-17-115.compute-1.amazonaws.com
+```
+
 
 

@@ -149,7 +149,7 @@ crontab –e
 
 ---
 
-## Iniciando ambiente já criado
+## Iniciando ambiente já criado (Inicializado a partir de uma AMI)
 
 Caso você já tenha o ambiente criado, utilize o script de inicialização do ambiente:
 ```bash

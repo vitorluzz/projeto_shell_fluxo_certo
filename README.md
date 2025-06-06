@@ -39,10 +39,11 @@ Antes de executar o script, certifique-se de que você possui:
 
 ### 1 - Criando o repositório:
 
-**1.1** Clone este repositório:
+**1.1** Clonando este repositório e atualizando o sistema operacional da sua Ec2:
    ```bash
    git clone https://github.com/vitorluzz/projeto_shell_fluxo_certo.git
    cd projeto_shell_fluxo_certo
+   sudo apt update && sudo apt upgrade -y
    ```
    
 ---

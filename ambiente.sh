@@ -15,9 +15,6 @@ echo "
 echo "Iniciando FLUXO-CERTO..."
 echo "Verificação de dependências do sistema..."
 
-echo "🔧 Atualizando o sistema..."
-sudo apt update && sudo apt upgrade -y
-
 handle_error() {
     echo "❌ $1"
     exit 1

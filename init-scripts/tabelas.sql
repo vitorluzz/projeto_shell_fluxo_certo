@@ -97,7 +97,14 @@ create table log (
     constraint fk_logEmpresa FOREIGN KEY (fk_empresa) REFERENCES empresa(id)
 );
 
-
+CREATE TABLE mensagem (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    fk_empresa INT,
+    tipo VARCHAR(500),
+    assunto VARCHAR(500),
+    mensagem TEXT,
+    CONSTRAINT fk_msgEmpresa FOREIGN KEY (fk_empresa) REFERENCES empresa(id)
+);
 
 CREATE USER 'admin'@'%' IDENTIFIED BY 'urubu100';
 
